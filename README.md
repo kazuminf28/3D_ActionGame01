@@ -9,8 +9,10 @@ Unityで制作した3Dアクションゲームです。
 
 本プロジェクトでは以下のアセットを使用しています。
 
-- RPG Monster DUO PBR Polyart（制作者: ○○）
-- Glowing Forest（制作者: ○○）
+- RPG Monster DUO PBR Polyart（制作者: Dungeon Mason）
+- Dragon for Boss Monster : PBR（制作者: Dungeon Mason）
+- RPG Tiny Hero Duo PBR Polyart（制作者: Dungeon Mason）
+- Glowing Forest（制作者: Silver Cats）
 
 ※すべてUnity Asset Storeから取得
 
