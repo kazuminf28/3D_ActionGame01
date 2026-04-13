@@ -12,11 +12,14 @@ public class CameraControls : MonoBehaviour
 
     [Header("追跡対象までの距離")]
     public float distance = 4f;
+    [Header("最小のカメラ距離")]
+    public float minDistance = 1f;
 
     float yaw;
     float pitch;
     float start_yaw;
     float start_pitch;
+    float currentDistance;
     Vector3 player_position;
     void Start()
     {
@@ -32,6 +35,7 @@ public class CameraControls : MonoBehaviour
 
         start_yaw = yaw;
         start_pitch = pitch;
+        currentDistance = distance;
     }
     void Update()
     {
@@ -46,22 +50,27 @@ public class CameraControls : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
 
-        Vector3 offset = rotation * new Vector3 (0, 0, -distance);
+        Vector3 desired_offset = rotation * new Vector3 (0, 0, -distance);
 
-        Vector3 desired_position = player_position + offset;
+        Vector3 desired_position = player_position + desired_offset;
 
         
         Vector3 dir = (desired_position - player_position).normalized;
 
+        float target_distance = distance;
         RaycastHit hit;
         if (Physics.SphereCast(player_position, 0.3f, dir, out hit, distance))
         {
-            transform.position = player_position + dir * (hit.distance - 0.2f);
+            // transform.position = player_position + dir * (hit.distance - 0.2f);元もカメラの位置を直接いじっていた
+            target_distance = hit.distance - 0.2f;
         }
-        else
-        {
-            transform.position = desired_position;
-        }
+        target_distance = Mathf.Clamp(target_distance, minDistance, distance);
+
+        currentDistance = Mathf.Lerp(currentDistance, target_distance, Time.deltaTime * 10f);
+
+        Vector3 offset = rotation * new Vector3(0, 0, -currentDistance);
+        transform.position = player_position + offset;
+
 
         transform.LookAt(player);
         if (Input.GetKeyDown(KeyCode.R))
