@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Animator anim;
+    private PlayerAttackComb combo;
     [Header("プレイヤーのスピード")]
     public float PlayerSpeed;
 
@@ -12,11 +13,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        combo = GetComponent<PlayerAttackComb>();
     }
 
     void Update()
     {
        Move();
+       Attack();
     }
 
 #region MoveControls
@@ -50,5 +53,23 @@ public class PlayerController : MonoBehaviour
     }
 #endregion
 
-    
+#region AttackControls
+    void Attack()
+    {
+        bool Sprint = Input.GetKey(KeyCode.LeftShift);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Sprint && anim.GetBool("IsRun"))
+            {
+                anim.SetTrigger("IsDushAttack");
+            } else if (combo.canCombo)
+            {
+                anim.SetTrigger("IsAttack");
+            } else
+            {
+                anim.SetTrigger("IsAttack");
+            }
+        }
+    }
+#endregion 
 }
