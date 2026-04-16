@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 5884045464912601359}
   m_Layer: 0
   m_Name: Slime_Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -506,7 +506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78403d4eeef5b41ceb9d209a0ee75ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  Enemy: {fileID: 0}
   time: 10
   EnemySpeed: 5
 --- !u!1 &9197891496832108302
