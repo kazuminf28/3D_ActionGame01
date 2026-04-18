@@ -10,10 +10,6 @@ public class EnemyManeger : MonoBehaviour
     public Transform EnemyPlace2;
 
     float TimeCount = 0;
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

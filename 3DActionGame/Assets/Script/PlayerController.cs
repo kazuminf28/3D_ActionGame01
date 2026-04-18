@@ -1,9 +1,15 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Animator anim;
-    private PlayerAttackComb combo;
+    [Header("HP")]
+    public float MaxHP;
+    [Header("Power")]
+    public float Power;
+    [Header("Defense")]
+    public float Defense;
     [Header("プレイヤーのスピード")]
     public float PlayerSpeed;
 
@@ -16,10 +22,19 @@ public class PlayerController : MonoBehaviour
     Vector3 dashVelocity;
     bool isDashAttacking = false;
 
+    public AttackType currentAttack = AttackType.Normal;
+    float ComboStep = 0;
+    Rigidbody rb;
+    public enum AttackType
+    {
+        Normal,
+        Dash
+    }
+
     void Start()
     {
         anim = GetComponent<Animator>();
-        combo = GetComponent<PlayerAttackComb>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -28,7 +43,7 @@ public class PlayerController : MonoBehaviour
        Attack();
        if (isDashAttacking)
         {
-            transform.position += dashVelocity * Time.deltaTime;
+            rb.MovePosition(transform.position + dashVelocity * Time.deltaTime);
             dashVelocity *= 0.99f; //減速
         }
     }
@@ -74,13 +89,15 @@ public class PlayerController : MonoBehaviour
             switchMove = false;
             if (Sprint && anim.GetBool("IsRun"))
             {
+                currentAttack = AttackType.Dash;
                 anim.SetTrigger("IsDushAttack");
-                anim.SetBool("CanCombo", combo.canCombo);
+                // anim.SetBool("CanCombo", combo.canCombo);
             // } else if (combo.canCombo)
             // {
             //     anim.SetTrigger("IsAttack");
             } else
             {
+                currentAttack = AttackType.Normal;
                 anim.SetTrigger("IsAttack");
             }
         }
@@ -96,6 +113,42 @@ public class PlayerController : MonoBehaviour
     {
         isDashAttacking = false;
         dashVelocity = Vector3.zero;
+    }
+
+    public void NextCombo()
+    {
+        ComboStep++;
+    }
+
+    public void ResetCombo()
+    {
+        ComboStep = 0;
+    }
+
+    public float AttackDamage()
+    {
+        float damage = Power;
+        switch (ComboStep)
+        {
+            case 0:
+                damage *= 1.1f;
+                break;
+            case 1:
+                damage *= 1.2f;
+                break;
+            case 2:
+                damage *= 1.4f;
+                break;
+            default:
+                damage *= 1.8f;
+                break;
+        }
+        if (currentAttack == AttackType.Dash)
+        {
+            damage *= 1.5f;
+        }
+
+        return damage;
     }
 #endregion 
 
@@ -117,4 +170,5 @@ public class PlayerController : MonoBehaviour
         switchMove = true;
     }
 #endregion
+
 }

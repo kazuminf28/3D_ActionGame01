@@ -72,15 +72,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.32877055
-        functionName: OnWeapon
+      - time: 0.0043478236
+        functionName: NextCombo
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.757313
-        functionName: EnableCombo
+      - time: 0.32877055
+        functionName: OnWeapon
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -102,13 +102,6 @@ ModelImporter:
         messageOptions: 0
       - time: 1
         functionName: CanMove
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 1
-        functionName: DisableCombo
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

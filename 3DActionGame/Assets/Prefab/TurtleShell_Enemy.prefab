@@ -791,8 +791,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78403d4eeef5b41ceb9d209a0ee75ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  time: 10
-  EnemySpeed: 5
+  MaxHP: 20
+  Power: 6
+  Defense: 7
+  MoveSpeed: 4
+  AttackRange: 3
+  SearchRange: 10
+  WaitTimer: 4
 --- !u!1 &5887209008576439410
 GameObject:
   m_ObjectHideFlags: 0
