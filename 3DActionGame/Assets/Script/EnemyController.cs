@@ -25,6 +25,11 @@ public class EnemyController : MonoBehaviour
     private Animator anim;
     float Movetimer;
     float waitTime;
+    float sqrDistance;
+    bool Dead = false;
+    bool Attacking = false;
+    float attackCooldown = 1.5f;
+    float Cooltimer = 0f;
     void Start()
     {
         currentHP = MaxHP;
@@ -33,20 +38,32 @@ public class EnemyController : MonoBehaviour
         waitTime = WaitTimer;
         SetRandomDirection();
         Movetimer = Random.Range(2f, 4f);
+        // Destroy(gameObject, 5f);
     }
 
     
     void Update()
     {
+        Cooltimer -= Time.deltaTime;
         Move();
+        Attack();
     }
 
     void Move()
     {
-        float sqrDistance = (transform.position - player.transform.position).sqrMagnitude;
-
-        if (sqrDistance < SearchRange)
+        if (Dead) return;
+        if (Attacking)
         {
+            Vector3 dir = player.transform.position - transform.position;
+            dir.y = 0f;
+            transform.rotation = Quaternion.LookRotation(dir);
+            return;
+        } 
+        sqrDistance = (transform.position - player.transform.position).sqrMagnitude;
+
+        if (sqrDistance < SearchRange * SearchRange && sqrDistance > AttackRange * AttackRange)
+        {
+            anim.SetBool("IsBattle", true);
             Vector3 direction = player.transform.position - transform.position;
             direction.y = 0f;
             transform.rotation = Quaternion.LookRotation(direction);
@@ -72,7 +89,7 @@ public class EnemyController : MonoBehaviour
             }
             Movetimer -= Time.deltaTime;
             if(Movetimer <=0f){
-                if(Random.value < 0.3f)// 30%
+                if(Random.value < 0.5f)// 50%
                 {
                     IsWait = true;
                     waitTime = WaitTimer;
@@ -83,7 +100,10 @@ public class EnemyController : MonoBehaviour
             }
             Quaternion targetRotation = Quaternion.LookRotation(RandomDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f);
-            transform.position += RandomDirection * MoveSpeed * 0.5f * Time.deltaTime;
+            Vector3 pos = transform.position;
+            pos += RandomDirection * MoveSpeed * 0.5f * Time.deltaTime;
+            pos.y = transform.position.y;
+            transform.position = pos;
             anim.SetBool("IsRun", true);
         }
     }
@@ -111,13 +131,39 @@ public class EnemyController : MonoBehaviour
         StartCoroutine(HitStop());
         if (currentHP <= 0)
         {
+            Dead = true;
             Die();
         }
     }
 
     void Die()
     {
-        // anim.SetTrigger("IsDead");
+        anim.SetTrigger("IsDead");
         Destroy(gameObject, 2f);
+    }
+
+    void Attack()
+    {
+        if (Cooltimer > 0f) return;
+        sqrDistance = (transform.position - player.transform.position).sqrMagnitude;
+        if(sqrDistance < AttackRange * AttackRange)
+        {
+            Cooltimer = attackCooldown;
+            int rand = Random.Range(0, 2);
+            Debug.Log(rand);
+            anim.SetInteger("AttackIndex", rand);
+            anim.SetBool("IsAttack", true);
+            // anim.SetTrigger("IsAttack");
+        }
+    }
+
+    public void StartAttack()
+    {
+        Attacking = true;
+    }
+    public void EnemyCanMove()
+    {
+        Attacking = false;
+        anim.SetBool("IsAttack", false);
     }
 }
