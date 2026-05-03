@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -7,8 +6,6 @@ public class EnemyController : MonoBehaviour
     [Header("MaxHP")]
     public float MaxHP;
     private float currentHP;
-    [Header("Power")]
-    public float Power;
     [Header("Defense")]
     public float Defense;
     [Header("MoveSpeed")]
@@ -28,8 +25,18 @@ public class EnemyController : MonoBehaviour
     float sqrDistance;
     bool Dead = false;
     bool Attacking = false;
-    float attackCooldown = 1.5f;
+    // float attackCooldown = 1.5f;
     float Cooltimer = 0f;
+    [System.Serializable]
+    public class EnemyAttackData
+    {
+        public string name;
+        public float damage;
+        public float cooldown;
+        public GameObject WeaponObject;
+    }
+    public EnemyAttackData[] attacks;
+    private EnemyAttackData currentAttack;
     void Start()
     {
         currentHP = MaxHP;
@@ -44,9 +51,10 @@ public class EnemyController : MonoBehaviour
     
     void Update()
     {
+        Debug.Log("Attacking: " + Attacking);
         Cooltimer -= Time.deltaTime;
         Move();
-        Attack();
+        if (!Attacking && Cooltimer <= 0) Attack();
     }
 
     void Move()
@@ -60,21 +68,9 @@ public class EnemyController : MonoBehaviour
             return;
         } 
         sqrDistance = (transform.position - player.transform.position).sqrMagnitude;
-
-        if (sqrDistance < SearchRange * SearchRange && sqrDistance > AttackRange * AttackRange)
+        if (sqrDistance > SearchRange * SearchRange) //ランダム移動処理
         {
-            anim.SetBool("IsBattle", true);
-            Vector3 direction = player.transform.position - transform.position;
-            direction.y = 0f;
-            transform.rotation = Quaternion.LookRotation(direction);
-            transform.position = Vector3.MoveTowards(
-            transform.position,
-            new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z),
-            Time.deltaTime * MoveSpeed
-            );
-            anim.SetBool("IsRun", true);
-        } else //Random移動処理
-        {
+            anim.SetBool("IsBattle", false);
             if (IsWait)
             {
                 waitTime -= Time.deltaTime;
@@ -105,6 +101,29 @@ public class EnemyController : MonoBehaviour
             pos.y = transform.position.y;
             transform.position = pos;
             anim.SetBool("IsRun", true);
+        } else if(sqrDistance > AttackRange * AttackRange)
+        {
+            anim.SetBool("IsBattle", true);
+            Vector3 direction = player.transform.position - transform.position;
+            direction.y = 0f;
+            transform.rotation = Quaternion.LookRotation(direction);
+            transform.position = Vector3.MoveTowards(
+            transform.position,
+            new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z),
+            Time.deltaTime * MoveSpeed
+            );
+            anim.SetBool("IsRun", true);
+        } else
+        {
+            anim.SetBool("IsRun", false);
+            Vector3 direction = player.transform.position - transform.position;
+            direction.y = 0f;
+            transform.rotation = Quaternion.LookRotation(direction);
+            // transform.position = Vector3.MoveTowards(
+            // transform.position,
+            // new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z),
+            // Time.deltaTime * MoveSpeed
+            // );
         }
     }
 
@@ -148,22 +167,42 @@ public class EnemyController : MonoBehaviour
         sqrDistance = (transform.position - player.transform.position).sqrMagnitude;
         if(sqrDistance < AttackRange * AttackRange)
         {
-            Cooltimer = attackCooldown;
-            int rand = Random.Range(0, 2);
+            int rand = Random.Range(0, attacks.Length);
+            currentAttack = attacks[rand];
+            Cooltimer = currentAttack.cooldown;
             Debug.Log(rand);
             anim.SetInteger("AttackIndex", rand);
             anim.SetBool("IsAttack", true);
-            // anim.SetTrigger("IsAttack");
         }
+    }
+
+    public float GetDamage()
+    {
+        if (currentAttack == null) return 0;
+        return currentAttack.damage;
     }
 
     public void StartAttack()
     {
         Attacking = true;
+        Debug.Log("攻撃開始");
     }
+
     public void EnemyCanMove()
     {
+        Debug.Log("動けるようになった");
         Attacking = false;
         anim.SetBool("IsAttack", false);
+    }
+
+    public void OnAttackStart()
+    {
+        currentAttack.WeaponObject.GetComponent<Collider>().enabled = true;
+        currentAttack.WeaponObject.GetComponent<EnemyWeapon>().ResetHit();
+    }
+
+    public void OnAttackEnd()
+    {
+        currentAttack.WeaponObject.GetComponent<Collider>().enabled = false;
     }
 }

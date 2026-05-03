@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -6,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     [Header("HP")]
     public float MaxHP;
+    public float HP;
     [Header("Power")]
     public float Power;
     [Header("Defense")]
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public AttackType currentAttack = AttackType.Normal;
     float ComboStep = 0;
     Rigidbody rb;
+    private bool Dead = false;
     public enum AttackType
     {
         Normal,
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        HP = MaxHP;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
 #region MoveControls
     void Move()
     {
+        if(Dead) return;
         if(!switchMove) return;
         //カメラの向き基準の正面方向ベクトル
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -83,6 +86,7 @@ public class PlayerController : MonoBehaviour
 #region AttackControls
     void Attack()
     {
+        if(Dead) return;
         bool Sprint = Input.GetKey(KeyCode.LeftShift);
         if (Input.GetMouseButtonDown(0))
         {
@@ -171,4 +175,19 @@ public class PlayerController : MonoBehaviour
     }
 #endregion
 
+    public void Damage(float damage)
+    {
+        HP -= Mathf.Max(damage - Defense, 1f);
+        Debug.Log(HP);
+        if (HP <= 0)
+        {
+            Dead = true;
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        // anim.SetTrigger("IsDead");
+    }
 }

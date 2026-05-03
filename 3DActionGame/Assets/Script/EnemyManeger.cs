@@ -14,11 +14,11 @@ public class EnemyManeger : MonoBehaviour
     void Update()
     {
         TimeCount += Time.deltaTime;
-        if (TimeCount >= 5f)
-        {
-            Instantiate(Slime, EnemyPlace1.position, Quaternion.identity);
-            Instantiate(TurtleShell, EnemyPlace2.position, Quaternion.identity);
-            TimeCount = 0;
-        }
+        // if (TimeCount >= 5f)
+        // {
+        //     Instantiate(Slime, EnemyPlace1.position, Quaternion.identity);
+        //     Instantiate(TurtleShell, EnemyPlace2.position, Quaternion.identity);
+        //     TimeCount = 0;
+        // }
     }
 }
