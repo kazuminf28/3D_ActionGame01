@@ -115,6 +115,7 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("IsRun", true);
         } else
         {
+            anim.SetBool("IsBattle", true);
             anim.SetBool("IsRun", false);
             Vector3 direction = player.transform.position - transform.position;
             direction.y = 0f;
