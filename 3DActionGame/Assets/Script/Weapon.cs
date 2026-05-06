@@ -10,10 +10,11 @@ public class Weapon : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        EnemyController enemy = other.GetComponentInParent<EnemyController>();
+        if(enemy != null)
         {
             float damage = player.AttackDamage();
-            other.GetComponent<EnemyController>().HitDamage(damage);
+            enemy.HitDamage(damage);
         }
     }
 }

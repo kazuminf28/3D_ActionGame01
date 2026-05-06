@@ -147,6 +147,7 @@ public class EnemyController : MonoBehaviour
     {
         float finaldamage = Mathf.Max(damage - Defense, 1f);
         currentHP -= finaldamage;
+        Debug.Log("ダメージを受けた");
         // anim.SetTrigger("IsHit");
         StartCoroutine(HitStop());
         if (currentHP <= 0)
