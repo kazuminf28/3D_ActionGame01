@@ -179,6 +179,7 @@ public class PlayerController : MonoBehaviour
     {
         HP -= Mathf.Max(damage - Defense, 1f);
         Debug.Log(HP);
+        anim.SetTrigger("GetHit");
         if (HP <= 0)
         {
             Dead = true;
@@ -188,6 +189,6 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        // anim.SetTrigger("IsDead");
+        anim.SetBool("IsDead",true);
     }
 }
