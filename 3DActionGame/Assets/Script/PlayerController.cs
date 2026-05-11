@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -26,6 +27,13 @@ public class PlayerController : MonoBehaviour
     float ComboStep = 0;
     Rigidbody rb;
     private bool Dead = false;
+    private bool Jumping = false;
+    [Header("Dodge")]
+    public float DodgeSpeed = 10f;
+    public float DodgeTime = 0.3f;
+    Vector3 DodgeDirection;
+    private bool Dodging = false;
+    private bool Invincible = false;
     public enum AttackType
     {
         Normal,
@@ -55,6 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         if(Dead) return;
         if(!switchMove) return;
+        if(Dodging) return;
         //カメラの向き基準の正面方向ベクトル
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
 
@@ -81,12 +90,70 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsSprint", false);
         }
     }
+
+    void Dodge()
+    {
+        if(Dead || !switchMove || Jumping || Dodging) return;
+        if (Input.GetMouseButtonDown(1))
+        {
+            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+            Vector3 x = Camera.main.transform.right * Input.GetAxis("Horizontal");
+            Vector3 z = cameraForward * Input.GetAxis("Vertical");
+            DodgeDirection = (x + z).normalized;
+
+            if (DodgeDirection == Vector3.zero)
+            {
+                DodgeDirection = transform.forward;
+            }
+            StartCoroutine(DodgeCoroutine());
+        }
+    }
+
+    IEnumerator DodgeCoroutine()
+    {
+        Dodging = true;
+        switchMove = false;
+        anim.SetTrigger("IsDodge");
+        float dodgetimer = 0;
+        if (dodgetimer < DodgeTime)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(DodgeDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.15f);
+            transform.position += DodgeDirection * DodgeSpeed * Time.deltaTime;
+            dodgetimer += Time.deltaTime;
+            yield return null;
+        }
+        switchMove = true;
+        Dodging = false;
+    }
+
+    void OnInvincible()
+    {
+        Invincible = true;
+    }
+
+    void OffInvincible()
+    {
+        Invincible = false;
+    }
+
+    void Jump()
+    {
+        if(Dead) return;
+        if(!switchMove) return;
+        if(Jumping) return;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // anim.SetTrigger("IsJump");
+        }
+    }
 #endregion
 
 #region AttackControls
     void Attack()
     {
         if(Dead) return;
+        if(Jumping) return;
         bool Sprint = Input.GetKey(KeyCode.LeftShift);
         if (Input.GetMouseButtonDown(0))
         {
@@ -177,6 +244,7 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(float damage)
     {
+        if (Dead || Invincible) return;
         HP -= Mathf.Max(damage - Defense, 1f);
         Debug.Log(HP);
         anim.SetTrigger("GetHit");

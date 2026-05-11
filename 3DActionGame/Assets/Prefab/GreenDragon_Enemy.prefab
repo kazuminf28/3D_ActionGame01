@@ -393,12 +393,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78403d4eeef5b41ceb9d209a0ee75ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  MaxHP: 1
-  Defense: 1
-  MoveSpeed: 1
+  MaxHP: 100
+  Defense: 7
+  MoveSpeed: 4
   AttackRange: 7
   SearchRange: 8
-  WaitTimer: 1
+  WaitTimer: 10
   attacks:
   - name: Attack1
     damage: 8
