@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
        Move();
        Attack();
+       Dodge();
        if (isDashAttacking)
         {
             rb.MovePosition(transform.position + dashVelocity * Time.deltaTime);
@@ -127,12 +128,12 @@ public class PlayerController : MonoBehaviour
         Dodging = false;
     }
 
-    void OnInvincible()
+    public void OnInvincible()
     {
         Invincible = true;
     }
 
-    void OffInvincible()
+    public void OffInvincible()
     {
         Invincible = false;
     }
@@ -244,7 +245,11 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(float damage)
     {
-        if (Dead || Invincible) return;
+        if (Dead) return;
+        if (Invincible) {
+            Debug.Log("回避");
+            return;
+        }
         HP -= Mathf.Max(damage - Defense, 1f);
         Debug.Log(HP);
         anim.SetTrigger("GetHit");

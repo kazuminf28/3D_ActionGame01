@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
     
     void Update()
     {
-        Debug.Log("Attacking: " + Attacking);
+        // Debug.Log("Attacking: " + Attacking);
         Cooltimer -= Time.deltaTime;
         Move();
         if (!Attacking && Cooltimer <= 0) Attack();
@@ -147,7 +147,7 @@ public class EnemyController : MonoBehaviour
     {
         float finaldamage = Mathf.Max(damage - Defense, 1f);
         currentHP -= finaldamage;
-        Debug.Log("ダメージを受けた");
+        // Debug.Log("ダメージを受けた");
         // anim.SetTrigger("IsHit");
         StartCoroutine(HitStop());
         if (currentHP <= 0)
@@ -172,7 +172,7 @@ public class EnemyController : MonoBehaviour
             int rand = Random.Range(0, attacks.Length);
             currentAttack = attacks[rand];
             Cooltimer = currentAttack.cooldown;
-            Debug.Log(rand);
+            // Debug.Log(rand);
             anim.SetInteger("AttackIndex", rand);
             anim.SetBool("IsAttack", true);
         }
@@ -187,12 +187,12 @@ public class EnemyController : MonoBehaviour
     public void StartAttack()
     {
         Attacking = true;
-        Debug.Log("攻撃開始");
+        // Debug.Log("攻撃開始");
     }
 
     public void EnemyCanMove()
     {
-        Debug.Log("動けるようになった");
+        // Debug.Log("動けるようになった");
         Attacking = false;
         anim.SetBool("IsAttack", false);
     }
