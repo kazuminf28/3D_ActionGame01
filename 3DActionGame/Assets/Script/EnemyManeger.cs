@@ -9,6 +9,10 @@ public class EnemyManeger : MonoBehaviour
     public Transform EnemyPlace1;
     public Transform EnemyPlace2;
 
+    // public Transform EnemyPlace3;
+
+    public static int EnemyCount = 0;
+
     float TimeCount = 0;
 
     void Update()

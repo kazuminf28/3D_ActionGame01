@@ -39,6 +39,7 @@ public class EnemyController : MonoBehaviour
     private EnemyAttackData currentAttack;
     void Start()
     {
+        EnemyManeger.EnemyCount++;
         currentHP = MaxHP;
         player = GameObject.Find("Player");
         anim = GetComponent<Animator>();
@@ -160,6 +161,7 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         anim.SetTrigger("IsDead");
+        EnemyManeger.EnemyCount--;
         Destroy(gameObject, 2f);
     }
 
