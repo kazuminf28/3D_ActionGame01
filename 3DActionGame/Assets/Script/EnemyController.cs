@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     public float WaitTimer;
     Vector3 RandomDirection;
     bool IsWait = false;
+    private EnemyManeger EM;
     private GameObject player;
     private Animator anim;
     float Movetimer;
@@ -161,7 +162,7 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         anim.SetTrigger("IsDead");
-        EnemyManeger.EnemyCount--;
+        EM.EnemyDead();
         Destroy(gameObject, 2f);
     }
 

@@ -5,6 +5,8 @@ public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
 
+    private RankingController rank;
+
     private float timer;
     private bool isStop = false;
 
@@ -21,6 +23,15 @@ public class Timer : MonoBehaviour
         timerText.text = minutes.ToString("00") + ":" +
                         seconds.ToString("00") + ":" +
                         milliseconds.ToString("00");
+    }
+
+    public void ResetTimer()
+    {
+        timer = 0;
+    }
+    public void ClearTime()
+    {
+        rank.UpdateRanking(timer);
     }
 
     public void StopTimer()
