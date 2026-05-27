@@ -4,6 +4,13 @@ using UnityEngine;
 public class RankingController : MonoBehaviour
 {
     private int rankingmax = 5;
+
+    public void SaveClearTime(float cleartime)
+    {
+        PlayerPrefs.SetFloat("ClearTime", cleartime);
+        PlayerPrefs.Save();    
+    }
+
     public void UpdateRanking(float cleartime)
     {
         List<float> ranking = new List<float>();

@@ -31,7 +31,7 @@ public class Timer : MonoBehaviour
     }
     public void ClearTime()
     {
-        rank.UpdateRanking(timer);
+        rank.SaveClearTime(timer);
     }
 
     public void StopTimer()

@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     public float WaitTimer;
     Vector3 RandomDirection;
     bool IsWait = false;
-    private EnemyManeger EM;
+    private EnemyManager EM;
     private GameObject player;
     private Animator anim;
     float Movetimer;
@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
     private EnemyAttackData currentAttack;
     void Start()
     {
-        EnemyManeger.EnemyCount++;
+        EnemyManager.EnemyCount++;
         currentHP = MaxHP;
         player = GameObject.Find("Player");
         anim = GetComponent<Animator>();

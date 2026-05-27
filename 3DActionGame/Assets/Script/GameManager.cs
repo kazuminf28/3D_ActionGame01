@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManeger : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public GameObject Player;
     public Transform PlayerPosition;
@@ -17,11 +18,6 @@ public class GameManeger : MonoBehaviour
     {
         TimeControlle.StopTimer();
         TimeControlle.ClearTime();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SceneManager.LoadScene("ClearScene");
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyManeger : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
     [Header("敵の種類")]
     public GameObject Slime;
@@ -13,7 +13,7 @@ public class EnemyManeger : MonoBehaviour
 
     // public Transform EnemyPlace3;
 
-    private GameManeger GM;
+    private GameManager GM;
     public static int EnemyCount = 0;
 
     float TimeCount = 0;
