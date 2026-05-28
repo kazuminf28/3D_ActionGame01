@@ -22,11 +22,19 @@ Unityで制作した3Dアクションゲームです。
 
 本プロジェクトでは以下の素材を使用しています。
 
-- On-Jin ～音人～
+- On-Jin ～音人～  https://on-jin.com/
 
-刀剣・空を斬る
+  刀剣・空を斬る
 
-https://on-jin.com/sound/sen.php?kate=%E6%AD%A6%E5%99%A8%EF%BC%88%E5%88%80%E5%89%A3%EF%BC%89
+  https://on-jin.com/sound/sen.php?kate=%E6%AD%A6%E5%99%A8%EF%BC%88%E5%88%80%E5%89%A3%EF%BC%89
+
+  刀剣・斬る07
+
+  https://on-jin.com/sound/sen.php?kate=%E6%AD%A6%E5%99%A8%EF%BC%88%E5%88%80%E5%89%A3%EF%BC%89
+
+  砕ける
+
+  https://on-jin.com/sound/index.php?kensaku=%E6%B6%88%E3%81%88%E3%82%8B
 
 ## ライセンス・注意事項
 
