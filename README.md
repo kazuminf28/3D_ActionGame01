@@ -22,7 +22,7 @@ Unityで制作した3Dアクションゲームです。
 
 本プロジェクトでは以下の素材を使用しています。
 
-- On-Jin ～音人～  https://on-jin.com/
+- On-Jin ～音人～  (https://on-jin.com/)
 
   刀剣・空を斬る
 
@@ -35,6 +35,20 @@ Unityで制作した3Dアクションゲームです。
   砕ける
 
   https://on-jin.com/sound/index.php?kensaku=%E6%B6%88%E3%81%88%E3%82%8B
+
+- OtoLogic  (https://otologic.jp/)
+
+  オノマトペ　キラキラ03
+
+  https://otologic.jp/free/se/sparkle01.html
+
+- なぐもりずの音楽室
+  
+  Website: https://nagumorizu.com/
+  
+  YouTube: https://www.youtube.com/@nagumorizu
+
+  
 
 ## ライセンス・注意事項
 
