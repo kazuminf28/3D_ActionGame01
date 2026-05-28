@@ -11,12 +11,10 @@ public class EnemyManager : MonoBehaviour
     public Transform EnemyPlace1;
     public Transform EnemyPlace2;
 
-    // public Transform EnemyPlace3;
+    public Transform EnemyPlace3;
 
-    private GameManager GM;
+    public GameManager GM;
     public static int EnemyCount = 0;
-
-    float TimeCount = 0;
 
     void Start()
     {
@@ -31,16 +29,5 @@ public class EnemyManager : MonoBehaviour
         {
             GM.GameClear();
         }
-    }
-
-    void Update()
-    {
-        TimeCount += Time.deltaTime;
-        // if (TimeCount >= 5f)
-        // {
-        //     Instantiate(Slime, EnemyPlace1.position, Quaternion.identity);
-        //     Instantiate(TurtleShell, EnemyPlace2.position, Quaternion.identity);
-        //     TimeCount = 0;
-        // }
     }
 }

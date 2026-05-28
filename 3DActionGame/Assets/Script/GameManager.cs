@@ -20,4 +20,11 @@ public class GameManager : MonoBehaviour
         TimeControlle.ClearTime();
         SceneManager.LoadScene("ClearScene");
     }
+
+    public void GameOver()
+    {
+        TimeControlle.StopTimer();
+        TimeControlle.ResetTimer();
+        SceneManager.LoadScene("GameOverScene");
+    }
 }

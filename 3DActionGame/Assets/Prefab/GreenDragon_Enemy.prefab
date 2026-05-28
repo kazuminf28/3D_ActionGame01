@@ -399,6 +399,7 @@ MonoBehaviour:
   AttackRange: 7
   SearchRange: 8
   WaitTimer: 10
+  Effect: {fileID: 8915986621592855108, guid: 907d1d51ebcfa43608d6a40ae19f4c69, type: 3}
   attacks:
   - name: Attack1
     damage: 8

@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
     public float SearchRange;
     [Header("WaitTimer")]
     public float WaitTimer;
+    [Header("Effect")]
+    public GameObject Effect;
     Vector3 RandomDirection;
     bool IsWait = false;
     private EnemyManager EM;
@@ -40,6 +42,7 @@ public class EnemyController : MonoBehaviour
     private EnemyAttackData currentAttack;
     void Start()
     {
+        EM = FindAnyObjectByType<EnemyManager>();
         EnemyManager.EnemyCount++;
         currentHP = MaxHP;
         player = GameObject.Find("Player");
@@ -162,7 +165,9 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         anim.SetTrigger("IsDead");
+        var effect = Instantiate(Effect, transform.position, Quaternion.identity);
         EM.EnemyDead();
+        Destroy(effect, 2f);
         Destroy(gameObject, 2f);
     }
 

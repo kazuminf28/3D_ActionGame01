@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     Vector3 DodgeDirection;
     private bool Dodging = false;
     private bool Invincible = false;
+    private GameManager GM;
     public enum AttackType
     {
         Normal,
@@ -263,5 +264,7 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         anim.SetBool("IsDead",true);
+        GM.GameOver();
+        
     }
 }
