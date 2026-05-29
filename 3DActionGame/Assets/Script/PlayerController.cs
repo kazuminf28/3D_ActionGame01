@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("HP")]
     public float MaxHP;
     public float HP;
+    public Image HPGage;
     [Header("Power")]
     public float Power;
     [Header("Defense")]
@@ -254,6 +256,8 @@ public class PlayerController : MonoBehaviour
         HP -= Mathf.Max(damage - Defense, 1f);
         Debug.Log(HP);
         anim.SetTrigger("GetHit");
+        float percent = HP / MaxHP;
+        HPGage.fillAmount = percent;
         if (HP <= 0)
         {
             Dead = true;
@@ -265,6 +269,5 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetBool("IsDead",true);
         GM.GameOver();
-        
     }
 }

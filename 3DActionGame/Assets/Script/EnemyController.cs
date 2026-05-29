@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
     [Header("MaxHP")]
     public float MaxHP;
+    public Image HPGage;
     private float currentHP;
     [Header("Defense")]
     public float Defense;
@@ -18,6 +20,7 @@ public class EnemyController : MonoBehaviour
     public float WaitTimer;
     [Header("Effect")]
     public GameObject Effect;
+    public LineRenderer EffectLine;
     Vector3 RandomDirection;
     bool IsWait = false;
     private EnemyManager EM;
@@ -76,6 +79,7 @@ public class EnemyController : MonoBehaviour
         if (sqrDistance > SearchRange * SearchRange) //ランダム移動処理
         {
             anim.SetBool("IsBattle", false);
+            EffectLine.forceRenderingOff = false;
             if (IsWait)
             {
                 waitTime -= Time.deltaTime;
@@ -109,6 +113,7 @@ public class EnemyController : MonoBehaviour
         } else if(sqrDistance > AttackRange * AttackRange)
         {
             anim.SetBool("IsBattle", true);
+            EffectLine.forceRenderingOff = true;
             Vector3 direction = player.transform.position - transform.position;
             direction.y = 0f;
             transform.rotation = Quaternion.LookRotation(direction);
@@ -152,10 +157,12 @@ public class EnemyController : MonoBehaviour
     {
         float finaldamage = Mathf.Max(damage - Defense, 1f);
         currentHP -= finaldamage;
+        float percent = currentHP / 100;
+        HPGage.fillAmount = percent;
         // Debug.Log("ダメージを受けた");
         // anim.SetTrigger("IsHit");
         StartCoroutine(HitStop());
-        if (currentHP <= 0)
+        if (currentHP <= 0 && Dead == false)
         {
             Dead = true;
             Die();

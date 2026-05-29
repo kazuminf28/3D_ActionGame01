@@ -11,6 +11,7 @@ public class ResultManager : MonoBehaviour
     public TextMeshProUGUI ClearTimeText;
     void Start()
     {
+        rank = FindAnyObjectByType<RankingController>();
         cleartime = PlayerPrefs.GetFloat("ClearTime", -1);
         ShowClearTime();
         RankUpdate();
@@ -20,9 +21,9 @@ public class ResultManager : MonoBehaviour
     void ShowClearTime()
     {
         ClearTimeText.text = "クリアタイム: ";
-        if (cleartime >= 0)
+        if (cleartime > 0)
         {
-            ClearTimeText.text = FormatTime(cleartime);
+            ClearTimeText.text += FormatTime(cleartime);
         }
     }
 

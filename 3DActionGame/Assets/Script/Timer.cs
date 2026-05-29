@@ -5,7 +5,7 @@ public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
 
-    private RankingController rank;
+    public RankingController rank;
 
     private float timer;
     private bool isStop = false;

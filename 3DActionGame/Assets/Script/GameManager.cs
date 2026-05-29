@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Player;
     public Transform PlayerPosition;
-    private Timer TimeControlle;
+    public Timer TimeControlle;
 
     void Start()
     {

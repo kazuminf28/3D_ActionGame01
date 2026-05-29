@@ -11,6 +11,16 @@ public class RankingController : MonoBehaviour
         PlayerPrefs.Save();    
     }
 
+    public void RankReset()
+    {
+        for (int i = 0; i < rankingmax; i++)
+        {
+            PlayerPrefs.DeleteKey("Rank" + i);
+        }
+        PlayerPrefs.Save();
+        Debug.Log("ランキングリセット");
+    }
+
     public void UpdateRanking(float cleartime)
     {
         List<float> ranking = new List<float>();
@@ -18,7 +28,7 @@ public class RankingController : MonoBehaviour
         for(int i = 0; i < rankingmax; i++)
         {
             float time = PlayerPrefs.GetFloat("Rank" + i, -1);
-            if (time >= 0)
+            if (time > 0)
             {
                 ranking.Add(time);
             }
