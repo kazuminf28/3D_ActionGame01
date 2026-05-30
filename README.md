@@ -52,7 +52,14 @@ Unityで制作した3Dアクションゲームです。
   
   YouTube: https://www.youtube.com/@nagumorizu
 
+- Howling-Indicator(https://howlingindicator.net)
+
+  game_over
   
+- 『魔王魂』(https://maou.audio/)
+
+  ジングル07
+
 
 ## ライセンス・注意事項
 
