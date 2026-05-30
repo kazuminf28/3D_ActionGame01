@@ -26,12 +26,12 @@ Unityで制作した3Dアクションゲームです。
 
   刀剣・空を斬る
 
-  https://on-jin.com/sound/sen.php?kate=%E6%AD%A6%E5%99%A8%EF%BC%88%E5%88%80%E5%89%A3%EF%BC%89
-
   刀剣・斬る07
 
-  https://on-jin.com/sound/sen.php?kate=%E6%AD%A6%E5%99%A8%EF%BC%88%E5%88%80%E5%89%A3%EF%BC%89
+  刀剣・斬る09
 
+  https://on-jin.com/sound/sen.php?kate=%E6%AD%A6%E5%99%A8%EF%BC%88%E5%88%80%E5%89%A3%EF%BC%89
+  
   砕ける
 
   https://on-jin.com/sound/index.php?kensaku=%E6%B6%88%E3%81%88%E3%82%8B
