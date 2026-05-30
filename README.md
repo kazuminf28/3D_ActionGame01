@@ -30,6 +30,10 @@ Unityで制作した3Dアクションゲームです。
 
   刀剣・斬る09
 
+  棍棒・鈍器・殴打04
+
+  ブーメラン
+
   https://on-jin.com/sound/sen.php?kate=%E6%AD%A6%E5%99%A8%EF%BC%88%E5%88%80%E5%89%A3%EF%BC%89
   
   砕ける
