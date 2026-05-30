@@ -1057,8 +1057,8 @@ MonoBehaviour:
   EffectLine: {fileID: 5912249032330495098}
   audioSource: {fileID: 3146718177161614832}
   AttackSE:
-  - {fileID: 8300000, guid: 64283208c36364545bf1acfe3e5601b3, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 294f7c4cb6e4d41a68f5e8a3c72f41ac, type: 3}
+  - {fileID: 8300000, guid: 294f7c4cb6e4d41a68f5e8a3c72f41ac, type: 3}
   attacks:
   - name: Attack1
     damage: 5

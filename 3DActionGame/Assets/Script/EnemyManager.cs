@@ -18,9 +18,10 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
+        EnemyCount = 0;
         Instantiate(Slime, EnemyPlace1.position, Quaternion.identity);
         Instantiate(TurtleShell, EnemyPlace2.position, Quaternion.identity);
-        // Instantiate(Dragon, EnemyPlace3.position, Quaternion.identity);
+        Instantiate(Dragon, EnemyPlace3.position, Quaternion.identity);
     }
 
     public void EnemyDead()

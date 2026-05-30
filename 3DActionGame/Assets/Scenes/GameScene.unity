@@ -7419,7 +7419,7 @@ MonoBehaviour:
   Dragon: {fileID: 975693677716492671, guid: 319470ddaab9d4758823c480db4c9190, type: 3}
   EnemyPlace1: {fileID: 855837330}
   EnemyPlace2: {fileID: 993395353}
-  EnemyPlace3: {fileID: 0}
+  EnemyPlace3: {fileID: 993395353}
   GM: {fileID: 1172536202}
 --- !u!65 &1359275918
 BoxCollider:

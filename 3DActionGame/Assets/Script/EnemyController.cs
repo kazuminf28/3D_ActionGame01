@@ -194,7 +194,7 @@ public class EnemyController : MonoBehaviour
             Cooltimer = currentAttack.cooldown;
             // Debug.Log(rand);
             anim.SetInteger("AttackIndex", rand);
-            audioSource.PlayOneShot(AttackSE[Random.Range(0, AttackSE.Count())]);
+            audioSource.PlayOneShot(AttackSE[rand]);
             anim.SetBool("IsAttack", true);
         }
     }
@@ -209,6 +209,11 @@ public class EnemyController : MonoBehaviour
     {
         Attacking = true;
         // Debug.Log("攻撃開始");
+    }
+
+    public void AudioList2()
+    {
+        audioSource.PlayOneShot(AttackSE[1]);
     }
 
     public void EnemyCanMove()
