@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,10 @@ public class EnemyController : MonoBehaviour
     [Header("Effect")]
     public GameObject Effect;
     public LineRenderer EffectLine;
+    [Header("攻撃SE")]
+    public AudioSource audioSource;
+    public AudioClip[] AttackSE;
+
     Vector3 RandomDirection;
     bool IsWait = false;
     private EnemyManager EM;
@@ -157,7 +162,7 @@ public class EnemyController : MonoBehaviour
     {
         float finaldamage = Mathf.Max(damage - Defense, 1f);
         currentHP -= finaldamage;
-        float percent = currentHP / 100;
+        float percent = currentHP / MaxHP;
         HPGage.fillAmount = percent;
         // Debug.Log("ダメージを受けた");
         // anim.SetTrigger("IsHit");
@@ -189,6 +194,7 @@ public class EnemyController : MonoBehaviour
             Cooltimer = currentAttack.cooldown;
             // Debug.Log(rand);
             anim.SetInteger("AttackIndex", rand);
+            audioSource.PlayOneShot(AttackSE[Random.Range(0, AttackSE.Count())]);
             anim.SetBool("IsAttack", true);
         }
     }

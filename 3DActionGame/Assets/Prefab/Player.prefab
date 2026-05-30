@@ -786,6 +786,9 @@ MonoBehaviour:
   SprintSpeed: 8
   WeaponCollider: {fileID: 1756334601360174251}
   currentAttack: 0
+  audioSource: {fileID: 2092954914459256188}
+  AttackSE: {fileID: 8300000, guid: 6103aa7f99e9b4c9388485b7a8285dbc, type: 3}
+  DashAttackSE: {fileID: 8300000, guid: 4895f5873a7034fcbb68c534fcc25769, type: 3}
   DodgeSpeed: 10
   DodgeTime: 0.3
 --- !u!114 &112803964358574525
@@ -3518,6 +3521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5f58a5793a3434a9e041a9f9f6ee20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  audioSource: {fileID: 2092954914459256188}
+  HitSE: {fileID: 8300000, guid: 2c1e430e4b0ce4c7e9b735bcf9695e03, type: 3}
 --- !u!4 &2010782138507840159 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5086268201243115593, guid: 9fbe61d1f4bc091439f25f985dd189a5, type: 3}
