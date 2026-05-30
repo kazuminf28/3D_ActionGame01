@@ -7,6 +7,7 @@ public class TitleManager : MonoBehaviour
     public GameObject ConfirmPanel;
     public GameObject CreditObject;
     public GameObject ControllerObject;
+    public GameObject GameExp;
     public RankingController rank;
     public void StartGame()
     {
@@ -59,6 +60,18 @@ public class TitleManager : MonoBehaviour
     public void CloseController()
     {
         ControllerObject.SetActive(false);
+        TitleObject.SetActive(true);
+    }
+
+    public void OpenGameExp()
+    {
+        TitleObject.SetActive(false);
+        GameExp.SetActive(true);
+    }
+
+    public void CloseGameExp()
+    {
+        GameExp.SetActive(false);
         TitleObject.SetActive(true);
     }
 }
