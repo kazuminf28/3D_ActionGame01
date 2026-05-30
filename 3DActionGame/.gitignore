@@ -74,3 +74,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/TextMesh Pro/Fonts/NotoSansJP-VariableFont_wght SDF.asset
+# 音声素材
+Assets/AudioSource/
+Assets/AssetStore_Add/
