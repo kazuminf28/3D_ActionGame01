@@ -791,6 +791,7 @@ MonoBehaviour:
   DashAttackSE: {fileID: 8300000, guid: 4895f5873a7034fcbb68c534fcc25769, type: 3}
   DodgeSpeed: 10
   DodgeTime: 0.3
+  GM: {fileID: 0}
 --- !u!114 &112803964358574525
 MonoBehaviour:
   m_ObjectHideFlags: 0

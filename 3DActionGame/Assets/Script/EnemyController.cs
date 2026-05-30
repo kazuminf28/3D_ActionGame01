@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
         EM = FindAnyObjectByType<EnemyManager>();
         EnemyManager.EnemyCount++;
         currentHP = MaxHP;
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
         anim = GetComponent<Animator>();
         waitTime = WaitTimer;
         SetRandomDirection();

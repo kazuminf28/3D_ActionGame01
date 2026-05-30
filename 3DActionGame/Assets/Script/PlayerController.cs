@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         HP = MaxHP;
+        GM = FindAnyObjectByType<GameManager>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }
@@ -261,6 +262,7 @@ public class PlayerController : MonoBehaviour
         }
         HP -= Mathf.Max(damage - Defense, 1f);
         Debug.Log(HP);
+        switchMove = false;
         anim.SetTrigger("GetHit");
         float percent = HP / MaxHP;
         HPGage.fillAmount = percent;
