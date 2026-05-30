@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
 
     public AttackType currentAttack = AttackType.Normal;
     float ComboStep = 0;
+    [Header("剣の音")]
+    public AudioSource audioSource;
+    public AudioClip AttackSE;
+    public AudioClip DashAttackSE;
     Rigidbody rb;
     private bool Dead = false;
     private bool Jumping = false;
@@ -166,6 +170,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentAttack = AttackType.Dash;
                 anim.SetTrigger("IsDushAttack");
+                audioSource.PlayOneShot(DashAttackSE);
                 // anim.SetBool("CanCombo", combo.canCombo);
             // } else if (combo.canCombo)
             // {
@@ -174,6 +179,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentAttack = AttackType.Normal;
                 anim.SetTrigger("IsAttack");
+                audioSource.PlayOneShot(AttackSE);
             }
         }
     }

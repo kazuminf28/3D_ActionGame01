@@ -3,6 +3,9 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     private PlayerController player;
+    [Header("剣の音")]
+    public AudioSource audioSource;
+    public AudioClip HitSE;
     void Start()
     {
         player = GetComponentInParent<PlayerController>();
@@ -13,6 +16,7 @@ public class Weapon : MonoBehaviour
         EnemyController enemy = other.GetComponentInParent<EnemyController>();
         if(enemy != null)
         {
+            audioSource.PlayOneShot(HitSE);
             float damage = player.AttackDamage();
             enemy.HitDamage(damage);
         }
